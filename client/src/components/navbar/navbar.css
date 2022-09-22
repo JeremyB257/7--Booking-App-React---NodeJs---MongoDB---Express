@@ -1,27 +1,149 @@
-.navbar{
-  height: 50px;
-  background-color: #003580;
-  display: flex;
-  justify-content: center;
-}
+/* header */
 
-.navContainer{
-  width: 100%;
-  max-width: 1024px;
-  color: white;
+header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  width: 265px;
+}
+.logo img {
+  max-height: 50px;
 }
 
-.logo{
-  font-weight: 500;
+.nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
 }
 
-.navButton{
-  margin-left: 20px;
+.nav ul li {
+  list-style: none;
+  margin: 20px 20px 20px 20px;
+}
+
+.nav ul li a:hover {
+  color: blue;
+  border-top: 3px solid blue;
+}
+
+.nav ul li a {
+  padding: 17px 0 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .nav {
+    width: 100%;
+  }
+
+  .nav ul li {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    border-bottom: 3px solid rgb(242, 242, 242);
+    margin: 0;
+    padding: 0 0 5px 0;
+  }
+
+  .nav ul li a:hover {
+    border-top: none;
+  }
+  .nav ul li:hover {
+    color: blue;
+    border-top: none;
+    border-bottom: 3px solid blue;
+  }
+}
+.navButton {
   border: none;
   padding: 5px 10px;
   cursor: pointer;
-  color: #003580;
+}
+.logModal {
+  position: absolute;
+  width: 500px;
+  left: calc(50% - 250px);
+  top: 65px;
+  z-index: 2;
+}
+
+/*Log Form*/
+.log-container {
+  width: 500px;
+  margin: auto;
+}
+.connection-form {
+  border: none;
+  background: white;
+  min-width: 490px;
+  width: 90%;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+@media screen and (max-width: 550px) {
+  .connection-form {
+    min-width: 200px;
+  }
+}
+
+.form-container ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-container ul li {
+  cursor: pointer;
+  width: 100%;
+  padding: 10px 20px;
+  color: var(--black);
+  background: rgb(0, 113, 194, 20%);
+  background-clip: padding-box;
+}
+@media screen and (max-width: 550px) {
+  .form-container ul li {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.form-container ul li:nth-child(1) {
+  border-radius: 5px 0 0 0;
+}
+.form-container ul li:nth-child(2) {
+  border-radius: 0 5px 0 0;
+}
+.active-btn {
+  background: var(--color-2);
+  color: var(--white);
+  border: 3px solid white;
+}
+li:not(.active-btn) {
+  border: 3px solid transparent;
+}
+li:not(.active-btn):hover {
+  background: var(--white);
+  color: var(--color-2);
+  border: 3px solid var(--color-2);
+}
+
+form input {
+  padding: 14px 20px;
+  margin: 0;
+  font-size: 1.2rem;
+
+  border-radius: 20px;
 }

@@ -132,9 +132,3 @@ header {
   background-color: var(--color-2);
   color: white;
 }
-form input {
-  padding: 14px 20px;
-  margin: 0;
-  font-size: 1.2rem;
-  border-radius: 20px;
-}

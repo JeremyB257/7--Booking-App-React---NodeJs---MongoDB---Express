@@ -1,21 +1,25 @@
 import UserModel from '../models/user.model.js';
 import fs from 'fs';
 
-export function getAllUsers(req, res) {
-  UserModel.find()
-    .select('-password')
-    .then((users) => res.status(200).json(users))
-    .catch((error) => res.status(404).json({ error }));
-}
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await UserModel.find().select('-password');
+    res.status(200).json(users);
+  } catch (err) {
+    next(err);
+  }
+};
 
-export function getUser(req, res) {
-  UserModel.findOne({ _id: req.params.id })
-    .select('-password')
-    .then((user) => res.status(200).json(user))
-    .catch((error) => res.status(404).json({ error }));
-}
+export const getUser = async (req, res, next) => {
+  try {
+    const user = await UserModel.findById(req.params.id);
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+};
 
-export function updateUser(req, res) {
+export const updateUser = async (req, res, next) => {
   const userObject = { ...req.body };
   delete userObject._userId;
   UserModel.findOne({ _id: req.params.id })
@@ -31,9 +35,9 @@ export function updateUser(req, res) {
     .catch((error) => {
       res.status(400).json({ error });
     });
-}
+};
 
-export function deleteUser(req, res) {
+export const deleteUser = async (req, res, next) => {
   UserModel.findOne({ _id: req.params.id })
     .then((user) => {
       if (user._id != req.auth.userId) {
@@ -53,4 +57,4 @@ export function deleteUser(req, res) {
       res.status(500).json({ error });
       console.log(error);
     });
-}
+};

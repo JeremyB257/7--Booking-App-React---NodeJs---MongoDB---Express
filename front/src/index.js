@@ -1,18 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import './styles/normalize.css'
-import './styles/style.css'
-import { AuthContextProvider } from "./context/AuthContext";
-import { SearchContextProvider } from "./context/SearchContext";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './styles/index.scss';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+import { getUsers } from './actions/users.actions';
+import { getPosts } from './actions/post.actions';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+//dev tools
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+
+store.dispatch(getUsers());
+store.dispatch(getPosts());
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <AuthContextProvider>
-      <SearchContextProvider>
-        <App />
-      </SearchContextProvider>
-    </AuthContextProvider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );

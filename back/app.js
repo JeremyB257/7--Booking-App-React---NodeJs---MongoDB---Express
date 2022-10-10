@@ -1,35 +1,37 @@
 import express, { json, urlencoded } from 'express';
-import { connect } from 'mongoose';
-import cors from 'cors';
-import { requireAuth, checkUser } from './middleware/auth.middleware';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 const app = express();
-require('dotenv').config();
+dotenv.config();
 
-app.use(json());
-app.use(urlencoded({ extended: true }));
+import cors from 'cors';
 
-import userRoutes from './routes/user.routes';
-import postRoutes from './routes/post.routes';
+//Import Routes
+import userRoutes from './routes/user.routes.js';
+import hotelsRoute from './routes/hotel.routes.js';
+import roomsRoute from './routes/room.routes.js';
 
-connect(
-  'mongodb+srv://' +
-    process.env.DB_CONNECT +
-    '@cluster0.devgshf.mongodb.net/' +
-    process.env.DB_NAME +
-    '?retryWrites=true&w=majority',
-  { useNewUrlParser: true, useUnifiedTopology: true }
-)
+// connect to MongoDb
+mongoose
+  .connect(
+    'mongodb+srv://' +
+      process.env.DB_CONNECT +
+      '@cluster0.devgshf.mongodb.net/' +
+      process.env.DB_NAME +
+      '?retryWrites=true&w=majority',
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
+//Middleware
 app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
-app.get('*', checkUser);
-app.get('/jwtid', requireAuth, (req, res) => {
-  res.status(200).send(res.locals.user._id);
-});
-
+//Use Routes
 app.use('/api/user', userRoutes);
-app.use('/api/post', postRoutes);
+app.use('/api/hotels', hotelsRoute);
+app.use('/api/rooms', roomsRoute);
 
 export default app;

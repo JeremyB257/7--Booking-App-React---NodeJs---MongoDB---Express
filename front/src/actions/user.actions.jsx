@@ -7,7 +7,7 @@ export const getUser = (uid) => {
   return (dispatch) => {
     return axios({
       method: 'get',
-      url: `${process.env.REACT_APP_PUBLIC_URL}api/user/${uid.id}`,
+      url: `${process.env.REACT_APP_PUBLIC_URL}api/user/${uid}`,
       headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
     })
       .then((res) => {

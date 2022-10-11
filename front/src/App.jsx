@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LogPage from './pages/LogPage';
 import Home from './pages/Home';
-import Profile from './pages/Profile';
+import Profil from './pages/Profil';
+import Hotel from './pages/Hotel';
 import axios from 'axios';
 import { UidContext } from './components/AppContext';
 import { useDispatch } from 'react-redux';
@@ -20,24 +21,24 @@ const App = () => {
         headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       })
         .then((res) => {
-          console.log(res);
-          setUid(res.data);
+          setUid(res.data.id);
         })
         .catch((err) => console.log('No token'));
     };
     fetchToken();
 
     if (uid) dispatch(getUser(uid));
-  }, []);
+  }, [uid, dispatch]);
 
   return (
     <UidContext.Provider value={uid}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LogPage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<LogPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/log" element={<LogPage />} />
+          <Route path="/profil" element={<Profil />} />
+          <Route path="/hotel" element={<Hotel />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </UidContext.Provider>

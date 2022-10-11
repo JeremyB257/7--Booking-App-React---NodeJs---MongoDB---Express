@@ -24,8 +24,8 @@ header {
 }
 
 .nav ul li a:hover {
-  color: var(--color-2);
-  border-top: 3px solid var(--color-2);
+  color: $color-2;
+  border-top: 3px solid $color-2;
 }
 
 .nav ul li a {
@@ -62,9 +62,9 @@ header {
     border-top: none;
   }
   .nav ul li:hover {
-    color: blue;
+    color: $color-1;
     border-top: none;
-    border-bottom: 3px solid blue;
+    border-bottom: 3px solid $color-1;
   }
 }
 .navButton {
@@ -129,6 +129,6 @@ header {
 }
 #login.active-btn,
 #register.active-btn {
-  background-color: var(--color-2);
+  background-color: $color-2;
   color: white;
 }

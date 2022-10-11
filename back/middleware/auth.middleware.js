@@ -9,6 +9,7 @@ export const verifyToken = (req, res, next) => {
   jwt.verify(token, process.env.TOKEN, (err, user) => {
     if (err) return next(createError(403, 'Token is not valid !'));
     req.user = user;
+    res.locals.user = user;
     next();
   });
 };

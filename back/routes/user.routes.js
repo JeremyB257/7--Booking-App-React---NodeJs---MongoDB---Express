@@ -10,7 +10,7 @@ router.post('/register', register);
 router.post('/login', login);
 
 // user DB
-router.get('/', verifyUser, getAllUsers);
+router.get('/', getAllUsers);
 router.get('/:id', verifyUser, getUser);
 router.put('/:id', verifyUser, updateUser);
 router.delete('/:id', verifyUser, deleteUser);

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LogPage from './pages/LogPage';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
-import Trending from './pages/Trending';
 import axios from 'axios';
 import { UidContext } from './components/AppContext';
 import { useDispatch } from 'react-redux';
@@ -21,6 +20,7 @@ const App = () => {
         headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
       })
         .then((res) => {
+          console.log(res);
           setUid(res.data);
         })
         .catch((err) => console.log('No token'));
@@ -28,7 +28,7 @@ const App = () => {
     fetchToken();
 
     if (uid) dispatch(getUser(uid));
-  }, [uid, dispatch]);
+  }, []);
 
   return (
     <UidContext.Provider value={uid}>
@@ -37,7 +37,6 @@ const App = () => {
           <Route path="/" element={<LogPage />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/trending" element={<Trending />} />
           <Route path="*" element={<LogPage />} />
         </Routes>
       </BrowserRouter>

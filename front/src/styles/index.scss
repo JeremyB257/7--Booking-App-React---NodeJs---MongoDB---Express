@@ -7,12 +7,8 @@
 
 /* Composants : */
 @import './components/navbar';
-@import './components/card';
 @import './components/connectionForm';
-@import './components/newPostForm';
-@import './components/friendsHint';
-@import './components/trends';
-@import './components/leftNav';
+@import './components/header';
 
 /* Layout : */
 
@@ -21,6 +17,5 @@
 @import './pages/log';
 @import './pages/home';
 @import './pages/profil';
-@import './pages/trending';
 
 /* Themes : */

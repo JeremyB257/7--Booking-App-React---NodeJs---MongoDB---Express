@@ -11,7 +11,7 @@ export const getAllUsers = async (req, res, next) => {
 
 export const getUser = async (req, res, next) => {
   try {
-    const user = await UserModel.findById(req.params.id);
+    const user = await UserModel.findById(req.params.id).select('-password');
     res.status(200).json(user);
   } catch (err) {
     next(err);

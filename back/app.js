@@ -10,7 +10,7 @@ import cors from 'cors';
 import userRoutes from './routes/user.routes.js';
 import hotelsRoute from './routes/hotel.routes.js';
 import roomsRoute from './routes/room.routes.js';
-
+import { verifyToken } from './middleware/auth.middleware.js';
 // connect to MongoDb
 mongoose
   .connect(
@@ -29,9 +29,12 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
+app.get('/jwtid', verifyToken, (req, res) => {
+  res.status(200).send(res.locals.user);
+});
 //Use Routes
 app.use('/api/user', userRoutes);
-app.use('/api/hotels', hotelsRoute);
-app.use('/api/rooms', roomsRoute);
+app.use('/api/hotel', hotelsRoute);
+app.use('/api/room', roomsRoute);
 
 export default app;

@@ -246,34 +246,3 @@ input[type='checkbox'] {
     height: 127px;
   }
 }
-/* Footer */
-
-footer {
-  background-color: rgb(242, 242, 242);
-  padding: 25px;
-  margin: 50px 0 0 0;
-}
-footer nav {
-  max-width: 900px;
-  display: flex;
-  justify-content: space-between;
-}
-.footer {
-  margin: 0;
-}
-.footer ul {
-  padding: 0;
-}
-.footer ul li {
-  list-style: none;
-  margin: 5px 0;
-}
-
-@media screen and (max-width: 768px) {
-  footer {
-    flex-direction: column;
-  }
-  .footer {
-    margin: 10px 0;
-  }
-}

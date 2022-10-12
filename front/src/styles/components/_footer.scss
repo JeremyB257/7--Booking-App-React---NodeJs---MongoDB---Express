@@ -1,0 +1,36 @@
+/* Footer */
+
+footer {
+  background-color: rgb(240, 240, 240);
+  padding: 25px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+footer nav {
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.footer {
+  margin: 0;
+}
+.footer ul {
+  padding: 0;
+}
+.footer ul li {
+  list-style: none;
+  margin: 5px 0;
+}
+
+@media screen and (max-width: 768px) {
+  footer nav {
+    flex-direction: column;
+  }
+  .footer {
+    margin: 10px 0;
+  }
+}

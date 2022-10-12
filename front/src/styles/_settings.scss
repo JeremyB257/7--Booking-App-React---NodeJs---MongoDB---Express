@@ -27,6 +27,15 @@ $shadow: rgb(176, 176, 176);
     background: rgba($color-2, 0.5);
   }
 }
+#root {
+  position: relative;
+  min-height: 100vh;
+  &::after {
+    content: '';
+    display: block;
+    height: 200px;
+  }
+}
 header,
 main {
   margin: 0 auto;
@@ -38,7 +47,6 @@ h1 {
 }
 h2 {
   font-size: 1rem;
-  margin: 0 5px;
 }
 
 p {

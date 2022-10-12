@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { UidContext } from '../components/AppContext';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import UpdateProfil from '../components/Profil/UpdateProfil';
 import LogPage from './LogPage';
@@ -10,9 +11,12 @@ const Profile = () => {
   return uid ? (
     <>
       <Navbar />
-      <div className="profil-page">
-        <UpdateProfil />
-      </div>
+      <main>
+        <div className="profil-page">
+          <UpdateProfil />
+        </div>
+      </main>
+      <Footer />
     </>
   ) : (
     <LogPage />

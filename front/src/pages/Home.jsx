@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { UidContext } from '../components/AppContext';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 const Home = () => {
@@ -9,7 +10,10 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      home
+      <main>
+        <h1>home</h1>
+      </main>
+      <Footer />
     </>
   );
 };

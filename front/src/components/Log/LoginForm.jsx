@@ -32,12 +32,21 @@ const LoginForm = () => {
       <div className="login error"></div>
       <label htmlFor="email">Email</label>
       <br />
-      <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} value={email} required />
+      <input
+        className="entre"
+        type="email"
+        name="email"
+        id="email"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        required
+      />
       <br />
       <br />
       <label htmlFor="password">Password</label>
       <br />
       <input
+        className="entre"
         type="password"
         name="password"
         id="password"

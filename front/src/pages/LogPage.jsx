@@ -4,9 +4,9 @@ import Log from '../components/Log/Log';
 const LogPage = () => {
   return (
     <div className="log-page">
-      <img src="./img/icons/logo-plein.png" alt="icon orange" />
-      <h3>Name Media</h3>
-      <p>Connect With Your Friends Online</p>
+      <img src="./img/logo/booki@3x.png" alt="Logo Booki" />
+
+      <p>Hebergeur de rêve</p>
       <div className="log-container">
         <Log login={true} signup={false} />
       </div>

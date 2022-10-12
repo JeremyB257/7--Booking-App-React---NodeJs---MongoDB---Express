@@ -109,7 +109,7 @@ header {
   cursor: pointer;
   width: 100%;
   padding: 10px 20px;
-  color: var(--black);
+  color: $black;
   background: rgb(0, 113, 194, 20%);
   background-clip: padding-box;
   border: 2px solid white;

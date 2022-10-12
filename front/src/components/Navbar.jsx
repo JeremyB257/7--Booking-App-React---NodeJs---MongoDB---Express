@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { UidContext } from './AppContext';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Log from './Log/Log';
 import { useSelector } from 'react-redux';
 
@@ -14,13 +14,13 @@ const Navbar = () => {
   return (
     <header>
       <div className="logo">
-        <Link to="/">
+        <NavLink to="/">
           <img src="./img/logo/Booki@3x.png" alt="logo Booki" />
-        </Link>
+        </NavLink>
       </div>
       {uid ? (
         <h4>
-          Bonjour <Link to="/profil">{user.pseudo}</Link>
+          Bonjour <NavLink to="/profil">{user.pseudo}</NavLink>
         </h4>
       ) : (
         <>
@@ -40,13 +40,19 @@ const Navbar = () => {
         <div className="nav">
           <ul>
             <li>
-              <Link to="/home">Accueil</Link>
+              <NavLink to="/home" className={(nav) => (nav.isActive ? 'active-nav' : '')}>
+                Accueil
+              </NavLink>
             </li>
             <li>
-              <Link to="/profil">Profil</Link>
+              <NavLink to="/profil" className={(nav) => (nav.isActive ? 'active-nav' : '')}>
+                Profil
+              </NavLink>
             </li>
             <li>
-              <Link to="/hotel">Hotel</Link>
+              <NavLink to="/hotel" className={(nav) => (nav.isActive ? 'active-nav' : '')}>
+                Ajouter un hebergement
+              </NavLink>
             </li>
           </ul>
         </div>

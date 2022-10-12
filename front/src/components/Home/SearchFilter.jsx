@@ -5,7 +5,7 @@ const SearchFilter = () => {
     <section className="search-filter">
       <h1>Trouvez votre hébergement pour des vacances de rêve</h1>
       <p>En plein centre ville ou en pleine nature</p>
-      <form action="#">
+      <form action="">
         <i className="fa-solid fa-location-dot"></i>
         <input type="text" placeholder="Marseille, France" required />
         <button type="submit">

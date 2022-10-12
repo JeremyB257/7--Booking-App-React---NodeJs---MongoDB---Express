@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 export const GET_USER = 'GET_USER';
+export const UPLOAD_PICTURE = 'UPLOAD_PICTURE';
 export const UPDATE_BIO = 'UPDATE_BIO';
+
+export const GET_USER_ERRORS = 'GET_USER_ERRORS';
 
 export const getUser = (uid) => {
   return (dispatch) => {
@@ -14,6 +17,38 @@ export const getUser = (uid) => {
         dispatch({ type: GET_USER, payload: res.data });
       })
       .catch((err) => console.log(err));
+  };
+};
+
+export const uploadPicture = (url, id) => {
+  return (dispatch) => {
+    return axios({
+      method: 'put',
+      url: `${process.env.REACT_APP_PUBLIC_URL}api/user/${id}`,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
+      data: {
+        picture: url,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: GET_USER_ERRORS, payload: '' });
+        return axios({
+          method: 'get',
+          url: `${process.env.REACT_APP_PUBLIC_URL}api/user/${id}`,
+          headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
+        }).then((res) => {
+          dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.data.error) {
+          dispatch({ type: GET_USER_ERRORS, payload: err.response.data.error });
+        } else {
+          dispatch({ type: GET_USER_ERRORS, payload: '' });
+        }
+      });
   };
 };
 

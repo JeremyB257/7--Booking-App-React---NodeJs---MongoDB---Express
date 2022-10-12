@@ -36,10 +36,18 @@ $shadow: rgb(176, 176, 176);
     height: 200px;
   }
 }
+@media screen and (max-width: 768px) {
+  #root {
+    &::after {
+      height: 400px;
+    }
+  }
+}
 header,
 main {
   margin: 0 auto;
   max-width: 1300px;
+  padding: 0 25px;
 }
 h1 {
   font-size: 1.3rem;

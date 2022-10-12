@@ -44,13 +44,25 @@ const HotelSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  feature: {
-    type: Boolean,
-    default: false,
-  },
   animals: {
     type: Boolean,
     required: true,
+    default: false,
+  },
+  love: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  fami: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  eco: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 });
 

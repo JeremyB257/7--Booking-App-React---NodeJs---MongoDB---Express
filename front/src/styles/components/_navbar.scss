@@ -31,9 +31,13 @@ header {
 .nav ul li a {
   padding: 19px 0 0 0;
   font-weight: bold;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {
+  .logo {
+    text-align: center;
+  }
   header {
     display: flex;
     flex-direction: column;
@@ -53,6 +57,7 @@ header {
   .nav ul li {
     display: flex;
     justify-content: center;
+    align-items: center;
     width: 50%;
     border-bottom: 3px solid rgb(242, 242, 242);
     margin: 0;

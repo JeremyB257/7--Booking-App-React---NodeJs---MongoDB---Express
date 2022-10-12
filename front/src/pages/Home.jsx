@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
+import SearchFilter from '../components/Home/SearchFilter';
 import Navbar from '../components/Navbar';
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
     <>
       <Navbar />
       <main>
-        <h1>home</h1>
+        <SearchFilter />
       </main>
       <Footer />
     </>

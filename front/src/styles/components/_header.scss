@@ -252,12 +252,13 @@ input[type='checkbox']:checked ~ div i {
   height: 35px;
   width: 35px;
   z-index: 0;
-  color: rgb(0, 100, 250);
+  color: $color-2;
 }
 
 .filter__selection div p {
   font-weight: bold;
   padding: 5px;
+  margin: 0 5px;
   white-space: nowrap;
 }
 

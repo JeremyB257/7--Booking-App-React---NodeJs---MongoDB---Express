@@ -79,7 +79,7 @@ export const createHotel = async (req, res, next) => {
     const savedHotel = await newHotel.save();
     res.status(200).json(savedHotel);
   } catch (err) {
-    next(createError(400, "Le formulaire n'est pas remplis correctement !"));
+    return res.status(400).json({ message: "Le formulaire n'est pas remplis correctement !" });
   }
 };
 

@@ -72,49 +72,44 @@ export const productInputs = [
 export const hotelInputs = [
   {
     id: 'name',
-    label: 'Nom',
+    label: 'Nom (obligatoire)',
     type: 'text',
     placeholder: 'Mon Hotel',
   },
-  {
-    id: 'type',
-    label: 'Type',
-    type: 'text',
-    placeholder: 'Hotel/Villa',
-  },
+
   {
     id: 'city',
-    label: 'Ville',
+    label: 'Ville (obligatoire)',
     type: 'text',
     placeholder: 'Paris',
   },
   {
     id: 'adress',
-    label: 'Adresse',
+    label: 'Adresse (obligatoire)',
     type: 'text',
     placeholder: '1 Rue de la paix',
   },
   {
     id: 'distance',
-    label: 'Distance du centre ville',
+    label: 'Distance du centre ville (obligatoire)',
     type: 'text',
     placeholder: '500 m',
   },
   {
     id: 'title',
-    label: 'Title',
+    label: 'Title (obligatoire)',
     type: 'text',
     placeholder: 'Le meilleur hotel de Paris',
   },
   {
     id: 'cheapestPrice',
-    label: 'Prix',
+    label: 'Prix (obligatoire)',
     type: 'number',
     placeholder: '100',
   },
   {
     id: 'desc',
-    label: 'Description',
+    label: 'Description (obligatoire)',
     type: 'text',
     placeholder: 'Description',
   },

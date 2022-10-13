@@ -1,5 +1,6 @@
 import HotelModel from '../models/hotel.model.js';
 import RoomModel from '../models/room.model.js';
+import { createError } from '../utils/errors.utils.js';
 
 //Read - Get
 export const getHotel = async (req, res, next) => {
@@ -78,7 +79,7 @@ export const createHotel = async (req, res, next) => {
     const savedHotel = await newHotel.save();
     res.status(200).json(savedHotel);
   } catch (err) {
-    next(err);
+    next(createError(400, "Le formulaire n'est pas remplis correctement !"));
   }
 };
 

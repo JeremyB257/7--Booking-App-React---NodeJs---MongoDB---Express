@@ -65,7 +65,8 @@ a:visited {
 input,
 textarea {
   resize: none;
-  width: 270px;
+  max-width: 270px;
+  width: 100%;
   font-family: $font-light;
 }
 textarea {
@@ -96,9 +97,6 @@ input[type='checkbox'] {
   margin: 10px 0;
 }
 
-html {
-  height: 100vh;
-}
 body {
   font-family: $font-regular;
   line-height: 1.4rem;

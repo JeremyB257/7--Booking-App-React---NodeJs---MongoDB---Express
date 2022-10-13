@@ -95,5 +95,10 @@
         }
       }
     }
+    @media screen and (max-width: 600px) {
+      .bottom {
+        flex-direction: column;
+      }
+    }
   }
 }

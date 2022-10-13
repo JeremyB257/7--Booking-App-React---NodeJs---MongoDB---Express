@@ -34,13 +34,13 @@
     }
   }
   .update-container {
-    display: grid;
-    grid-template-columns: 50% 50%;
+    display: flex;
+    justify-content: center;
     width: 90%;
     margin: 0 auto;
 
     @media screen and (max-width: 700px) {
-      grid-template-columns: 1fr;
+      flex-direction: column;
     }
 
     > div {
@@ -55,6 +55,7 @@
     }
     .left-part {
       text-align: center;
+      flex: 50%;
 
       h3 {
         margin-bottom: 12px;
@@ -74,7 +75,8 @@
         label {
           position: absolute;
           transform: translate(-50%, -50%);
-          width: 270px;
+          max-width: 270px;
+          width: 100%;
           background: $color-3;
           color: $color-2;
           border-radius: 20px;
@@ -93,6 +95,7 @@
 
           @media screen and (max-width: 1121px) {
             opacity: 0;
+            transform: translate(-50%, -25px);
           }
         }
         input[type='submit'] {
@@ -113,6 +116,7 @@
     .right-part {
       text-align: center;
       padding: 20px 40px;
+      flex: 50%;
       h3 {
         margin-bottom: 12px;
       }

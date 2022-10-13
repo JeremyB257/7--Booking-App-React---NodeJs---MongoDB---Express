@@ -1,7 +1,7 @@
 import UserModel from '../models/user.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { signUpErrors, createError } from '../utils/errors.utils.js';
+import { signUpErrors } from '../utils/errors.utils.js';
 
 export const register = async (req, res, next) => {
   const { pseudo, email, password } = req.body;
@@ -18,10 +18,10 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     const user = await UserModel.findOne({ email: req.body.email });
-    if (!user) return next(createError(401, 'Email/Mot de passe incorrect'));
+    if (!user) return res.status(401).json({ message: 'Email/Mot de passe incorrect' });
 
     const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
-    if (!isPasswordCorrect) return next(createError(401, 'Email/Mot de passe incorrect'));
+    if (!isPasswordCorrect) return res.status(401).json({ message: 'Email/Mot de passe incorrect' });
 
     const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.TOKEN, { expiresIn: '24h' });
 

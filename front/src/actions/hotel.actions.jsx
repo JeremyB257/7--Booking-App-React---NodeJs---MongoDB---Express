@@ -21,8 +21,8 @@ export const addHotel = (newHotel) => {
         }
       })
       .catch((err) => {
-        if (err.response.data.error) {
-          dispatch({ type: GET_HOTEL_ERRORS, payload: err.response.data.error });
+        if (err.response.data.message) {
+          dispatch({ type: GET_HOTEL_ERRORS, payload: err.response.data.message });
         }
       });
   };

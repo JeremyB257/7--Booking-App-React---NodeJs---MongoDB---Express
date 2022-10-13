@@ -16,9 +16,6 @@ const Hotel = () => {
   const [rooms, setRooms] = useState([]);
   const dispatch = useDispatch();
 
-  const validateForm = (e) => {
-    e.preventDefault();
-  };
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -30,6 +27,7 @@ const Hotel = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    document.querySelector('.error').innerHTML = '';
     try {
       const list = await Promise.all(
         Object.values(files).map(async (file) => {
@@ -48,9 +46,25 @@ const Hotel = () => {
         rooms,
         photos: list,
       };
-      console.log(newhotel);
-      await dispatch(addHotel(newhotel));
-      dispatch(getAllHotels());
+      console.log(info);
+      if (
+        info.adress &&
+        info.cheapestPrice &&
+        info.city &&
+        info.desc &&
+        info.distance &&
+        info.name &&
+        info.title &&
+        info.type
+      ) {
+        dispatch(addHotel(newhotel));
+        document.querySelector('.success').innerHTML = 'Hotel ajouter avec succes';
+        document.querySelector('.error').innerHTML = '';
+        dispatch(getAllHotels());
+      } else {
+        document.querySelector('.error').innerHTML = "Le formulaire n'est pas remplis correctement";
+        document.querySelector('.success').innerHTML = '';
+      }
     } catch (err) {
       console.log(err);
     }
@@ -106,7 +120,17 @@ const Hotel = () => {
                       style={{ display: 'none' }}
                     />
                   </div>
-
+                  <div className="formInput">
+                    <label>Types (obligatoire)</label>
+                    <select id="type" onChange={handleChange}>
+                      <option value="">--Type--</option>
+                      <option value="hotel">Hotel</option>
+                      <option value="villas">Villa</option>
+                      <option value="apartments">Apartement</option>
+                      <option value="house">Maison</option>
+                      <option value="other">Autres</option>
+                    </select>
+                  </div>
                   {hotelInputs.map((input) => (
                     <div className="formInput" key={input.id}>
                       <label>{input.label}</label>
@@ -148,6 +172,10 @@ const Hotel = () => {
                           </option>
                         ))} */}
                     </select>
+                  </div>
+                  <div className="message-error">
+                    <div className="error"></div>
+                    <div className="success"></div>
                   </div>
                   <input type="submit" value="Envoyer" onClick={handleClick} />
                 </form>

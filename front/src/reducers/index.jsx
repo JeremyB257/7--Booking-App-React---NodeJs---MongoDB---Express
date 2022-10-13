@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import usersReducer from './users.reducer';
 import userReducer from './user.reducer';
+import usersReducer from './users.reducer';
+import hotelsReducer from './hotels.reducer';
 import errorReducer from './error.reducer';
 
 export default combineReducers({
   userReducer,
   usersReducer,
+  hotelsReducer,
   errorReducer,
 });

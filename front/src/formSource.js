@@ -89,7 +89,7 @@ export const hotelInputs = [
     placeholder: 'Paris',
   },
   {
-    id: 'address',
+    id: 'adress',
     label: 'Adresse',
     type: 'text',
     placeholder: '1 Rue de la paix',

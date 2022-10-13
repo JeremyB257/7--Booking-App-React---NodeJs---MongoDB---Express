@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import { getUsers } from './actions/users.actions';
-import { getHotels } from './actions/hotels.actions';
+import { getAllUsers } from './actions/users.actions';
+import { getAllHotels } from './actions/hotels.actions';
 
 //dev tools
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -15,8 +15,8 @@ import logger from 'redux-logger';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
 
-store.dispatch(getUsers());
-store.dispatch(getHotels());
+store.dispatch(getAllUsers());
+store.dispatch(getAllHotels());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

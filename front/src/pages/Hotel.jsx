@@ -4,13 +4,21 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import LogPage from './LogPage';
 import { hotelInputs } from '../formSource';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { getAllHotels } from '../actions/hotels.actions';
+import { addHotel } from '../actions/hotel.actions';
 
 const Hotel = () => {
   const uid = useContext(UidContext);
   const [files, setFiles] = useState('');
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
+  const dispatch = useDispatch();
 
+  const validateForm = (e) => {
+    e.preventDefault();
+  };
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
@@ -20,7 +28,33 @@ const Hotel = () => {
     setRooms(value);
   };
 
-  const handleClick = async (e) => {};
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      const list = await Promise.all(
+        Object.values(files).map(async (file) => {
+          const data = new FormData();
+          data.append('file', file);
+          data.append('upload_preset', 'upload');
+          const uploadRes = await axios.post('https://api.cloudinary.com/v1_1/lamadev/image/upload', data);
+
+          const { url } = uploadRes.data;
+          return url;
+        })
+      );
+
+      const newhotel = {
+        ...info,
+        rooms,
+        photos: list,
+      };
+      console.log(newhotel);
+      await dispatch(addHotel(newhotel));
+      dispatch(getAllHotels());
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return uid ? (
     <>
@@ -35,8 +69,24 @@ const Hotel = () => {
               <div className="left">
                 <img
                   src={
-                    files
+                    files.length >= 1
                       ? URL.createObjectURL(files[0])
+                      : 'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'
+                  }
+                  alt=""
+                />
+                <img
+                  src={
+                    files.length >= 2
+                      ? URL.createObjectURL(files[1])
+                      : 'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'
+                  }
+                  alt=""
+                />
+                <img
+                  src={
+                    files.length >= 3
+                      ? URL.createObjectURL(files[2])
                       : 'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'
                   }
                   alt=""
@@ -99,7 +149,7 @@ const Hotel = () => {
                         ))} */}
                     </select>
                   </div>
-                  <button onClick={handleClick}>Envoyer</button>
+                  <input type="submit" value="Envoyer" onClick={handleClick} />
                 </form>
               </div>
             </div>

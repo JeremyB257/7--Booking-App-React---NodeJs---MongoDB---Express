@@ -15,6 +15,7 @@ const Hotel = () => {
   const [info, setInfo] = useState({});
   const [rooms, setRooms] = useState([]);
   const dispatch = useDispatch();
+  const [room, setRoom] = useState(false);
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -164,14 +165,8 @@ const Hotel = () => {
                   </div>
                   <div className="selectRooms">
                     <label>Chambres</label>
-                    <select id="rooms" multiple onChange={handleSelect}>
-                      {/*    {data &&
-                        data.map((room) => (
-                          <option key={room._id} value={room._id}>
-                            {room.title}
-                          </option>
-                        ))} */}
-                    </select>
+                    <i className="fa-solid fa-plus" onClick={() => setRoom(!room)}></i>
+                    {room ? <div className="roomModal">bonjour</div> : null}
                   </div>
                   <div className="message-error">
                     <div className="error"></div>

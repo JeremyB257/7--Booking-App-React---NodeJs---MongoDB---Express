@@ -104,3 +104,13 @@
     }
   }
 }
+.selectRooms {
+  position: relative;
+  .roomModal {
+    position: absolute;
+    width: 500px;
+    left: calc(50% - 250px);
+    top: 35px;
+    z-index: 2;
+  }
+}

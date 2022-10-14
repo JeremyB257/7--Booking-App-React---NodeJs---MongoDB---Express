@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getAllHotels } from '../actions/hotels.actions';
 import { addHotel } from '../actions/hotel.actions';
+import Room from '../components/Room';
 
 const Hotel = () => {
   const uid = useContext(UidContext);
@@ -166,7 +167,11 @@ const Hotel = () => {
                   <div className="selectRooms">
                     <label>Chambres</label>
                     <i className="fa-solid fa-plus" onClick={() => setRoom(!room)}></i>
-                    {room ? <div className="roomModal">bonjour</div> : null}
+                    {room ? (
+                      <div className="roomModal">
+                        <Room />
+                      </div>
+                    ) : null}
                   </div>
                   <div className="message-error">
                     <div className="error"></div>

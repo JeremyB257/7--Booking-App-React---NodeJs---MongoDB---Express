@@ -1,0 +1,46 @@
+import React from 'react';
+import { roomInputs } from '../formSource';
+
+const Room = () => {
+  const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const roomNumbers = rooms.split(',').map((room) => ({ number: room }));
+    try {
+      await axios.post(`${process.env.REACT_APP_PUBLIC_URL}/rooms/${hotelId}`, { ...info, roomNumbers });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  return (
+    <div className="connection-form">
+      <div className="form-container">
+        <div className="new">
+          <div className="newContainer">
+            <div className="bottom">
+              <form>
+                {roomInputs.map((input) => (
+                  <div className="formInput" key={input.id}>
+                    <label>{input.label}</label>
+                    <input id={input.id} type={input.type} placeholder={input.placeholder} onChange={handleChange} />
+                  </div>
+                ))}
+                <div className="formInput">
+                  <label>Rooms</label>
+                  <textarea onChange={(e) => setRooms(e.target.value)} placeholder="give comma between room numbers." />
+                </div>
+
+                <button onClick={handleClick}>Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Room;

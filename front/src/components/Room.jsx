@@ -21,7 +21,7 @@ const Room = () => {
         <div className="new">
           <div className="newContainer">
             <div className="bottom">
-              <form>
+              <div>
                 {roomInputs.map((input) => (
                   <div className="formInput" key={input.id}>
                     <label>{input.label}</label>
@@ -33,8 +33,8 @@ const Room = () => {
                   <textarea onChange={(e) => setRooms(e.target.value)} placeholder="give comma between room numbers." />
                 </div>
 
-                <button onClick={handleClick}>Send</button>
-              </form>
+                <button onClick={handleClick}>Envoyer</button>
+              </div>
             </div>
           </div>
         </div>

@@ -172,6 +172,24 @@ const Hotel = () => {
                         <Room />
                       </div>
                     ) : null}
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Titre</th>
+                          <th>description</th>
+                          <th>Prix</th>
+                          <th>Chambres</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                          <td>1</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                   <div className="message-error">
                     <div className="error"></div>

@@ -109,8 +109,8 @@
   .roomModal {
     position: absolute;
     width: 500px;
-    left: calc(50% - 250px);
-    top: 35px;
+    left: calc(45% - 250px);
+    top: 25px;
     z-index: 2;
   }
 }
@@ -118,11 +118,29 @@
 table {
   border-collapse: collapse;
   text-align: center;
+  width: 100%;
+  margin: 10px 0;
   th {
     border: 1px solid black;
     padding: 5px;
   }
   td {
     border: 1px solid black;
+  }
+}
+.room-form {
+  border: none;
+  background: white;
+  min-width: 490px;
+  width: 90%;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 5px;
+  .form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: center;
   }
 }

@@ -16,28 +16,20 @@ const Room = () => {
   };
 
   return (
-    <div className="connection-form">
+    <div className="room-form">
       <div className="form-container">
-        <div className="new">
-          <div className="newContainer">
-            <div className="bottom">
-              <div>
-                {roomInputs.map((input) => (
-                  <div className="formInput" key={input.id}>
-                    <label>{input.label}</label>
-                    <input id={input.id} type={input.type} placeholder={input.placeholder} onChange={handleChange} />
-                  </div>
-                ))}
-                <div className="formInput">
-                  <label>Rooms</label>
-                  <textarea onChange={(e) => setRooms(e.target.value)} placeholder="give comma between room numbers." />
-                </div>
-
-                <button onClick={handleClick}>Envoyer</button>
-              </div>
-            </div>
+        {roomInputs.map((input) => (
+          <div className="formInput" key={input.id}>
+            <label>{input.label}</label>
+            <input id={input.id} type={input.type} placeholder={input.placeholder} onChange={handleChange} />
           </div>
+        ))}
+        <div className="formInput">
+          <label>Rooms</label>
+          <textarea onChange={(e) => setRooms(e.target.value)} placeholder="give comma between room numbers." />
         </div>
+
+        <button onClick={handleClick}>Envoyer</button>
       </div>
     </div>
   );

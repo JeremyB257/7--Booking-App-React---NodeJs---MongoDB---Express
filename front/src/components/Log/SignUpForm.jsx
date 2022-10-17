@@ -44,7 +44,6 @@ const SignUpForm = () => {
           <label htmlFor="pseudo">Pseudo</label>
           <br />
           <input
-            className="entre"
             type="text"
             name="pseudo"
             id="pseudo"
@@ -57,7 +56,6 @@ const SignUpForm = () => {
           <label htmlFor="email">Email</label>
           <br />
           <input
-            className="entre"
             type="email"
             name="email"
             id="email"

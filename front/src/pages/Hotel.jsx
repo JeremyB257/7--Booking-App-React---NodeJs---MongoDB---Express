@@ -176,7 +176,7 @@ const Hotel = () => {
                       <thead>
                         <tr>
                           <th>Titre</th>
-                          <th>description</th>
+                          <th>Description</th>
                           <th>Prix</th>
                           <th>Chambres</th>
                         </tr>

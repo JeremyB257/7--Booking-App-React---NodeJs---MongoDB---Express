@@ -88,6 +88,9 @@
               border-radius: 5px;
               border-bottom: 1px solid gray;
             }
+            textarea {
+              border-radius: 5px;
+            }
           }
           @media screen and (max-width: 811px) {
             .formInput {
@@ -142,7 +145,7 @@ table {
   .form-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-content: space-around;
     align-items: center;
   }

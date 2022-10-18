@@ -25,8 +25,11 @@ const Room = () => {
           </div>
         ))}
         <div className="formInput">
-          <label>Rooms</label>
-          <textarea onChange={(e) => setRooms(e.target.value)} placeholder="give comma between room numbers." />
+          <label>Chambres</label>
+          <textarea
+            onChange={(e) => setRooms(e.target.value)}
+            placeholder="301, 302, 303(virgule entre les chambres)"
+          />
         </div>
 
         <button onClick={handleClick}>Envoyer</button>

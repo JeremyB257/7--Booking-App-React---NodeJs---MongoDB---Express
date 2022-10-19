@@ -27,7 +27,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form action="" onSubmit={handleLogin} id="sign-up-form">
+    <form action="" id="sign-up-form">
       <br />
       <div className="login error"></div>
       <label htmlFor="email">Email</label>
@@ -47,7 +47,7 @@ const LoginForm = () => {
       />
       <br />
       <br />
-      <input type="submit" value="Se connecter" />
+      <button onClick={handleLogin}>Se connecter</button>
       <br />
       <br />
     </form>

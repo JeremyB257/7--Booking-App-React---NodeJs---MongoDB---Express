@@ -38,7 +38,7 @@ const SignUpForm = () => {
           <h4 className="success">Enregistrement reussi, veuillez vous connectez</h4>
         </>
       ) : (
-        <form action="" onSubmit={handleSignUp} id="sign-up-form">
+        <form action="" id="sign-up-form">
           <br />
           <div className="signup error"></div>
           <label htmlFor="pseudo">Pseudo</label>
@@ -78,7 +78,7 @@ const SignUpForm = () => {
           />
           <br />
           <br />
-          <input type="submit" value="S'inscrire" />
+          <button onClick={handleSignUp}>S'inscrire</button>
           <br />
           <br />
         </form>

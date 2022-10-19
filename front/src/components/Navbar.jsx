@@ -29,12 +29,12 @@ const Navbar = () => {
             <button className="navButton" onClick={() => setLog(!log)}>
               Register/Login
             </button>
+            {log ? (
+              <div className="logModal">
+                <Log login={true} signup={false} />
+              </div>
+            ) : null}
           </div>
-          {log ? (
-            <div className="logModal">
-              <Log login={true} signup={false} />
-            </div>
-          ) : null}
         </>
       )}
       <nav>

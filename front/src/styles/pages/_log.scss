@@ -24,13 +24,13 @@
     font-weight: bold;
   }
   .log-container {
-    width: 500px;
+    max-width: 500px;
     margin: auto;
   }
   .connection-form {
     border: none;
     background: white;
-    min-width: 490px;
+
     width: 90%;
     text-align: center;
     margin: 0 auto;
@@ -38,7 +38,7 @@
     -webkit-box-shadow: 0px 0px 5px 0px $shadow;
     box-shadow: 0px 0px 5px 0px $shadow;
     @media screen and (max-width: 550px) {
-      min-width: 200px;
+      min-width: 295px;
     }
   }
 }

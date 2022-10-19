@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LogPage from './pages/LogPage';
 import Home from './pages/Home';
 import Profil from './pages/Profil';
-import Hotel from './pages/Hotel';
+import AddHotel from './pages/AddHotel';
 import axios from 'axios';
 import { UidContext } from './components/AppContext';
 import { useDispatch } from 'react-redux';
@@ -37,7 +37,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/log" element={<LogPage />} />
           <Route path="/profil" element={<Profil />} />
-          <Route path="/hotel" element={<Hotel />} />
+          <Route path="/addhotel" element={<AddHotel />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>

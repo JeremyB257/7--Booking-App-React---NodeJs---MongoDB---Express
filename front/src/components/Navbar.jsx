@@ -5,6 +5,7 @@ import { UidContext } from './AppContext';
 import { NavLink } from 'react-router-dom';
 import Log from './Log/Log';
 import { useSelector } from 'react-redux';
+import Logout from './Log/Logout';
 
 const Navbar = () => {
   const uid = useContext(UidContext);
@@ -50,10 +51,11 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/hotel" className={(nav) => (nav.isActive ? 'active-nav' : '')}>
+              <NavLink to="/addhotel" className={(nav) => (nav.isActive ? 'active-nav' : '')}>
                 Ajouter un hebergement
               </NavLink>
             </li>
+            <Logout />
           </ul>
         </div>
       </nav>

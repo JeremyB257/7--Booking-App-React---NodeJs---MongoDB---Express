@@ -4,11 +4,11 @@ const Logout = () => {
   const logout = async () => {
     window.localStorage.clear();
 
-    window.location = '/log';
+    window.location = '/home';
   };
 
   return (
-    <li onClick={logout}>
+    <li className="logout" onClick={logout}>
       <img src="./img/icons/logout.svg" alt="logout" />
     </li>
   );

@@ -5,6 +5,10 @@ const HotelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  posterId: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     required: true,
@@ -37,8 +41,17 @@ const HotelSchema = new mongoose.Schema({
     min: 0,
     max: 5,
   },
-  rooms: {
-    type: [String],
+  roomsList: {
+    type: [
+      {
+        title: String,
+        rommNumber: Number,
+        price: Number,
+        desc: String,
+        maxPeople: Number,
+        unavailableDates: { type: [Date] },
+      },
+    ],
   },
   cheapestPrice: {
     type: Number,

@@ -5,12 +5,15 @@ import { verifyUser } from '../middleware/auth.middleware.js';
 import {
   getHotel,
   getAllHotels,
-  getHotelRooms,
   countByCity,
   countByType,
   createHotel,
   updateHotel,
   deleteHotel,
+  createRoom,
+  editRoom,
+  updateRoomAvailability,
+  deleteRoom,
 } from '../controllers/hotel.controller.js';
 
 //Read - Get
@@ -18,7 +21,6 @@ router.get('/find/:id', getHotel);
 router.get('/', getAllHotels);
 router.get('/countByCity', countByCity);
 router.get('/countByType', countByType);
-router.get('/room/:id', getHotelRooms);
 
 //Create - post
 router.post('/', verifyUser, createHotel);
@@ -28,5 +30,12 @@ router.put('/:id', verifyUser, updateHotel);
 
 //Delete
 router.delete('/:id', verifyUser, deleteHotel);
+
+// Room
+
+router.patch('/:id/createRoom', verifyUser, createRoom);
+router.patch('/:id/editRoom', verifyUser, editRoom);
+router.put('/:id/availability', verifyUser, updateRoomAvailability);
+router.patch('/:id/deleteRoom', verifyUser, deleteRoom);
 
 export default router;

@@ -1,40 +1,29 @@
 import React from 'react';
-import { roomInputs } from '../formSource';
 
-const Room = () => {
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-  const handleClick = async (e) => {
-    e.preventDefault();
-    const roomNumbers = rooms.split(',').map((room) => ({ number: room }));
-    try {
-      await axios.post(`${process.env.REACT_APP_PUBLIC_URL}/rooms/${hotelId}`, { ...info, roomNumbers });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+const Room = (roomsList) => {
   return (
-    <div className="room-form">
-      <div className="form-container">
-        {roomInputs.map((input) => (
-          <div className="formInput" key={input.id}>
-            <label>{input.label}</label>
-            <input id={input.id} type={input.type} placeholder={input.placeholder} onChange={handleChange} />
-          </div>
-        ))}
-        <div className="formInput">
-          <label>Chambres</label>
-          <textarea
-            onChange={(e) => setRooms(e.target.value)}
-            placeholder="301, 302, 303(virgule entre les chambres)"
-          />
-        </div>
-
-        <button onClick={handleClick}>Envoyer</button>
-      </div>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Description</th>
+          <th>Prix</th>
+          <th>Chambre</th>
+        </tr>
+      </thead>
+      <tbody>
+        {roomsList.rooms.map((room) => {
+          return (
+            <tr key={room.roomNumber}>
+              <td>{room.title}</td>
+              <td>{room.desc}</td>
+              <td>{room.price}</td>
+              <td>{room.roomNumber}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 

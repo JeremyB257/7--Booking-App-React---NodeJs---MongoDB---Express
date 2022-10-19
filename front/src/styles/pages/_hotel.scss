@@ -111,8 +111,9 @@
   position: relative;
   .roomModal {
     position: absolute;
-    width: 500px;
-    left: calc(45% - 250px);
+    max-width: 500px;
+    width: 100%;
+    left: 0;
     top: 25px;
     z-index: 2;
   }
@@ -129,12 +130,13 @@ table {
   }
   td {
     border: 1px solid black;
+    font-weight: 400;
   }
 }
 .room-form {
   border: none;
   background: white;
-  min-width: 490px;
+
   width: 90%;
   text-align: center;
   margin: 0 auto;

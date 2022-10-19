@@ -3,28 +3,46 @@ import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import LogPage from './LogPage';
-import { hotelInputs } from '../formSource';
+import { hotelInputs, roomInputs } from '../formSource';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { getAllHotels } from '../actions/hotels.actions';
 import { addHotel } from '../actions/hotel.actions';
 import Room from '../components/Room';
 
+//
+
 const Hotel = () => {
   const uid = useContext(UidContext);
   const [files, setFiles] = useState('');
   const [info, setInfo] = useState({});
-  const [rooms, setRooms] = useState([]);
+  const [room, setRoom] = useState({});
+  const [roomsList, setRoomsList] = useState([]);
   const dispatch = useDispatch();
-  const [room, setRoom] = useState(false);
+  const [roomModal, setRoomModal] = useState(false);
+
+  const handleRoomChange = (e) => {
+    e.preventDefault();
+    setRoom((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleRoomClick = (e) => {
+    e.preventDefault();
+    if (roomsList.length === 0) {
+      setRoomsList([room]);
+    } else {
+      if (roomsList.some((e) => e.roomNumber === room.roomNumber)) {
+        document.querySelector('.error').innerHTML = 'La chambre existe deja';
+        document.querySelector('.success').innerHTML = '';
+      } else {
+        document.querySelector('.error').innerHTML = '';
+        setRoomsList([...roomsList, room]);
+      }
+    }
+  };
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
-  const handleSelect = (e) => {
-    const value = Array.from(e.target.selectedOptions, (option) => option.value);
-    setRooms(value);
   };
 
   const handleClick = async (e) => {
@@ -36,7 +54,7 @@ const Hotel = () => {
           const data = new FormData();
           data.append('file', file);
           data.append('upload_preset', 'upload');
-          const uploadRes = await axios.post('https://api.cloudinary.com/v1_1/lamadev/image/upload', data);
+          const uploadRes = await axios.post('https://api.cloudinary.com/v1_1/dfsaszwfq/image/upload', data);
 
           const { url } = uploadRes.data;
           return url;
@@ -45,10 +63,11 @@ const Hotel = () => {
 
       const newhotel = {
         ...info,
-        rooms,
+        posterId: uid,
+        roomsList,
         photos: list,
       };
-      console.log(info);
+
       if (
         info.adress &&
         info.cheapestPrice &&
@@ -63,6 +82,8 @@ const Hotel = () => {
         document.querySelector('.success').innerHTML = 'Hotel ajouter avec succes';
         document.querySelector('.error').innerHTML = '';
         dispatch(getAllHotels());
+        setRoomsList([]);
+        setFiles('');
       } else {
         document.querySelector('.error').innerHTML = "Le formulaire n'est pas remplis correctement";
         document.querySelector('.success').innerHTML = '';
@@ -70,6 +91,14 @@ const Hotel = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const resetButton = (e) => {
+    e.preventDefault();
+    setRoomsList([]);
+    setFiles('');
+    document.querySelector('.success').innerHTML = '';
+    document.querySelector('.error').innerHTML = '';
   };
 
   return uid ? (
@@ -166,35 +195,35 @@ const Hotel = () => {
                   </div>
                   <div className="selectRooms">
                     <label>Chambres</label>
-                    <i className="fa-solid fa-plus" onClick={() => setRoom(!room)}></i>
-                    {room ? (
+                    <i className="fa-solid fa-plus" onClick={() => setRoomModal(!roomModal)}></i>
+                    {roomModal ? (
                       <div className="roomModal">
-                        <Room />
+                        <div className="room-form">
+                          <div className="form-container">
+                            {roomInputs.map((input) => (
+                              <div className="formInput" key={input.id}>
+                                <label>{input.label}</label>
+                                <input
+                                  id={input.id}
+                                  type={input.type}
+                                  placeholder={input.placeholder}
+                                  onChange={handleRoomChange}
+                                />
+                              </div>
+                            ))}
+
+                            <button onClick={handleRoomClick}>Envoyer</button>
+                          </div>
+                        </div>
                       </div>
                     ) : null}
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Titre</th>
-                          <th>Description</th>
-                          <th>Prix</th>
-                          <th>Chambres</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>1</td>
-                          <td>1</td>
-                          <td>1</td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <Room rooms={roomsList} />
                   </div>
                   <div className="message-error">
                     <div className="error"></div>
                     <div className="success"></div>
                   </div>
+                  <button onClick={resetButton}>Reset </button>
                   <input type="submit" value="Envoyer" onClick={handleClick} />
                 </form>
               </div>

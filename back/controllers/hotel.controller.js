@@ -1,6 +1,4 @@
 import HotelModel from '../models/hotel.model.js';
-import RoomModel from '../models/room.model.js';
-import { createError } from '../utils/errors.utils.js';
 
 //Read - Get
 export const getHotel = async (req, res, next) => {
@@ -20,20 +18,6 @@ export const getAllHotels = async (req, res, next) => {
       cheapestPrice: { $gt: min | 1, $lt: max || 999 },
     }).limit(req.query.limit);
     res.status(200).json(hotels);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const getHotelRooms = async (req, res, next) => {
-  try {
-    const hotel = await HotelModel.findById(req.params.id);
-    const list = await Promise.all(
-      hotel.rooms.map((room) => {
-        return RoomModel.findById(room);
-      })
-    );
-    res.status(200).json(list);
   } catch (err) {
     next(err);
   }
@@ -102,3 +86,13 @@ export const deleteHotel = async (req, res, next) => {
     next(err);
   }
 };
+
+// Room
+
+export const createRoom = async (req, res, next) => {};
+
+export const editRoom = async (req, res, next) => {};
+
+export const updateRoomAvailability = async (req, res, next) => {};
+
+export const deleteRoom = async (req, res, next) => {};

@@ -74,7 +74,7 @@ export const hotelInputs = [
     id: 'name',
     label: 'Nom (obligatoire)',
     type: 'text',
-    placeholder: 'Mon Hotel',
+    placeholder: 'Crown Plaza Hotel',
   },
 
   {
@@ -97,7 +97,7 @@ export const hotelInputs = [
   },
   {
     id: 'title',
-    label: 'Title (obligatoire)',
+    label: 'Titre (obligatoire)',
     type: 'text',
     placeholder: 'Le meilleur hotel de Paris',
   },
@@ -118,9 +118,15 @@ export const hotelInputs = [
 export const roomInputs = [
   {
     id: 'title',
-    label: 'Title',
+    label: 'Titre',
     type: 'text',
     placeholder: 'Titre',
+  },
+  {
+    id: 'roomNumber',
+    label: 'N° Chambre (unique)',
+    type: 'text',
+    placeholder: '301',
   },
   {
     id: 'desc',

@@ -49,7 +49,7 @@ const Hotel = () => {
     e.preventDefault();
     document.querySelector('.error').innerHTML = '';
     try {
-      const list = await Promise.all(
+      var list = await Promise.all(
         Object.values(files).map(async (file) => {
           const data = new FormData();
           data.append('file', file);
@@ -61,6 +61,23 @@ const Hotel = () => {
         })
       );
 
+      if (list.length === 0) {
+        list = [
+          'https://res.cloudinary.com/dfsaszwfq/image/upload/v1666272189/hoteldefaut_tucggi.jpg',
+          'https://res.cloudinary.com/dfsaszwfq/image/upload/v1666272189/hoteldefaut_tucggi.jpg',
+          'https://res.cloudinary.com/dfsaszwfq/image/upload/v1666272189/hoteldefaut_tucggi.jpg',
+        ];
+      } else if (list.length === 1) {
+        list = [
+          ...list,
+          'https://res.cloudinary.com/dfsaszwfq/image/upload/v1666272189/hoteldefaut_tucggi.jpg',
+          'https://res.cloudinary.com/dfsaszwfq/image/upload/v1666272189/hoteldefaut_tucggi.jpg',
+        ];
+      } else if (list.length === 2) {
+        list = [...list, 'https://res.cloudinary.com/dfsaszwfq/image/upload/v1666272189/hoteldefaut_tucggi.jpg'];
+      } else {
+      }
+
       const newhotel = {
         ...info,
         posterId: uid,
@@ -69,7 +86,7 @@ const Hotel = () => {
       };
 
       if (
-        info.adress &&
+        info.address &&
         info.cheapestPrice &&
         info.city &&
         info.desc &&

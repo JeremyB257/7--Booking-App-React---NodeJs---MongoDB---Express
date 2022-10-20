@@ -1,9 +1,23 @@
 import axios from 'axios';
 
+export const GET_HOTEL = 'GET_HOTEL';
 export const ADD_HOTELS = 'ADD_HOTELS';
 
 //errors
 export const GET_HOTEL_ERRORS = 'GET_HOTEL_ERRORS';
+
+export const getHotel = (HotelId) => {
+  return (dispatch) => {
+    return axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_PUBLIC_URL}api${HotelId}`,
+    })
+      .then((res) => {
+        dispatch({ type: GET_HOTEL, payload: res.data });
+      })
+      .catch((err) => console.log(err));
+  };
+};
 
 export const addHotel = (newHotel) => {
   return (dispatch) => {

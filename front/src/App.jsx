@@ -8,6 +8,7 @@ import axios from 'axios';
 import { UidContext } from './components/AppContext';
 import { useDispatch } from 'react-redux';
 import { getUser } from './actions/user.actions';
+import Hotel from './pages/Hotel';
 
 const App = () => {
   const [uid, setUid] = useState(null);
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/log" element={<LogPage />} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/addhotel" element={<AddHotel />} />
+          <Route path="/hotel/:id" element={<Hotel />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </BrowserRouter>

@@ -15,10 +15,10 @@ const ProfilHotel = () => {
       <div className="establishment__card">
         {myHotel.map((hotel) => (
           <div className="thumbnail" key={hotel._id}>
-            <a href={`/hotel/${hotel._id}`}>
+            <NavLink to={`/hotel/${hotel._id}`}>
               <img className="thumbnail__img" src={hotel.photos[0]} alt="Image hotel" />
               <h3>{hotel.title}</h3>
-            </a>
+            </NavLink>
           </div>
         ))}
       </div>

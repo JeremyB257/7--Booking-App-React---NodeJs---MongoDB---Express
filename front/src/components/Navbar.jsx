@@ -16,7 +16,7 @@ const Navbar = () => {
     <header>
       <div className="logo">
         <NavLink to="/">
-          <img src="./img/logo/Booki@3x.png" alt="logo Booki" />
+          <img src="../img/logo/Booki@3x.png" alt="logo Booki" />
         </NavLink>
       </div>
       {uid ? (

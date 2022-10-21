@@ -91,9 +91,9 @@ export const hotelInputs = [
   },
   {
     id: 'distance',
-    label: 'Distance du centre ville (obligatoire)',
-    type: 'text',
-    placeholder: '500 m',
+    label: 'Distance du centre ville en metres (obligatoire)',
+    type: 'number',
+    placeholder: '500',
   },
   {
     id: 'title',

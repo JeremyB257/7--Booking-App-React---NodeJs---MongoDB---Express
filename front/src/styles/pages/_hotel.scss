@@ -52,7 +52,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  height: 510px;
+  max-height: 510px;
   justify-content: space-between;
 }
 
@@ -61,7 +61,7 @@
   .hotelImg {
     width: 100%;
     object-fit: cover;
-    max-height: 500px;
+    max-height: 504px;
     cursor: pointer;
   }
 }
@@ -124,8 +124,8 @@
   position: sticky;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 98vw;
+  height: 90vh;
   background-color: rgba(0, 0, 0, 0.613);
   z-index: 999;
   display: flex;
@@ -141,8 +141,9 @@
 }
 
 .sliderImg {
-  width: 80%;
-  height: 80vh;
+  max-width: 70vw;
+  min-width: 30vw;
+  object-fit: cover;
 }
 
 .close {

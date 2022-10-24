@@ -5,6 +5,7 @@ import { getHotel } from '../actions/hotel.actions';
 import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import Reserve from '../components/Reserve';
 import { SearchContext } from '../components/SearchContext';
 
 const Hotel = () => {
@@ -28,7 +29,7 @@ const Hotel = () => {
     return diffDays;
   }
 
-  /*   const days = dayDifference(dates[0].endDate, dates[0].startDate); */
+  //const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -93,16 +94,17 @@ const Hotel = () => {
                 <p className="hotelDesc">{hotelData.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
-                {/*        <h1>Perfect for a {days}-night stay!</h1>
+                {/*   <h1>Perfect for a {days}-night stay!</h1>
                 <span>Located in the real heart of Krakow, this property has an excellent location score of 9.8!</span>
                 <h2>
-                  <b>${days * data.cheapestPrice * options.room}</b> ({days} nights)
+                  <b>${days * hotelData.cheapestPrice * options.room}</b> ({days} nights)
                 </h2> */}
-                <button onClick={handleClick}>Reserve or Book Now!</button>
+                <button onClick={handleClick}>Réservez maintenant!</button>
               </div>
             </div>
           </div>
         </div>
+        {openModal && <Reserve setOpen={setOpenModal} hotelId={hotelData._id} />}
       </main>
       <Footer />
     </>

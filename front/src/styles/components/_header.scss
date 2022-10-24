@@ -78,8 +78,12 @@
 }
 
 .headerSearchText {
-  color: lightgray;
+  display: flex;
+  align-items: center;
+
   cursor: pointer;
+  border: 1px solid rgb(242, 242, 242);
+  padding: 5px 10px;
 }
 
 .date {
@@ -130,13 +134,13 @@
 /* search */
 
 .search-filter form {
-  width: 300px;
+  position: relative;
   height: 35px;
   display: flex;
   margin: 20px 0;
 }
 
-.search-filter form i {
+.search-filter form > i {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,6 +152,7 @@
 
 .search-filter form input {
   border: 1px solid rgb(242, 242, 242);
+  width: auto;
 }
 
 .search-filter form input::placeholder {
@@ -156,7 +161,7 @@
   padding: 10px;
 }
 
-.search-filter form button {
+.search-filter form button:not(.rdrDay, .rdrNextPrevButton) {
   color: white;
   font-weight: bold;
   background-color: $color-2;
@@ -165,7 +170,7 @@
   padding: 0 15px;
   cursor: pointer;
 }
-.search-filter form button i {
+.search-filter form button:not(.rdrNextPrevButton) i {
   background-color: transparent;
   display: none;
 }

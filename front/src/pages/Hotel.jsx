@@ -6,7 +6,6 @@ import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Reserve from '../components/Reserve';
-import { SearchContext } from '../components/SearchContext';
 
 const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);

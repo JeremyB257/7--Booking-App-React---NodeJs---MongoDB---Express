@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
 import Lodging from '../components/Home/Lodging';
-
 import Navbar from '../components/Navbar';
 import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';

@@ -6,6 +6,7 @@ import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Reserve from '../components/Reserve';
+import { SearchContext } from '../components/SearchContext';
 
 const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -19,7 +20,7 @@ const Hotel = () => {
     dispatch(getHotel(window.location.pathname));
   }, []);
 
-  const { dates, options } = useContext(SearchContext);
+  const { dates } = useContext(SearchContext);
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -28,7 +29,7 @@ const Hotel = () => {
     return diffDays;
   }
 
-  //const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  // const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
   const handleOpen = (i) => {
     setSlideNumber(i);

@@ -7,10 +7,12 @@ import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { useEffect } from 'react';
+import axios from 'axios';
+import useFetch from '../components/useFetch';
 
 const Home = () => {
   const uid = useContext(UidContext);
-
   const [destination, setDestination] = useState('Lille');
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
@@ -21,7 +23,31 @@ const Home = () => {
     },
   ]);
 
-  const handleSearch = () => {};
+  const [info, setInfo] = useState({});
+  let filter = '';
+
+  const handleFilter = (e) => {
+    if (e.target.checked) {
+      setInfo((prev) => ({ ...prev, [e.target.id]: e.target.checked }));
+    } else {
+      setInfo((prev) => {
+        const copy = { ...prev };
+        delete copy[e.target.id];
+        return copy;
+      });
+    }
+  };
+
+  if (info.eco) filter += '&eco=true';
+  if (info.animals) filter += '&animals=true';
+  if (info.fami) filter += '&fami=true';
+  if (info.love) filter += '&love=true';
+
+  const { data, error, reFetch } = useFetch(`/hotel?city=${destination}${filter}`);
+
+  const handleSearch = () => {
+    reFetch();
+  };
 
   return (
     <>
@@ -53,7 +79,7 @@ const Home = () => {
                   minDate={new Date()}
                 />
               )}
-              <button type="submit">
+              <button onClick={handleSearch}>
                 <i className="fa-solid fa-magnifying-glass"></i>
                 <span>Rechercher</span>
               </button>
@@ -63,28 +89,28 @@ const Home = () => {
           <div className="filter">
             <h2>Filtres</h2>
             <div className="filter__selection">
-              <input type="checkbox" id="filter-eco" />
+              <input type="checkbox" id="eco" onChange={handleFilter} />
               <div>
                 <i className="fa-solid fa-money-bill-wave "></i>
                 <p>Economique</p>
               </div>
             </div>
             <div className="filter__selection">
-              <input type="checkbox" id="filter-Fami" />
+              <input type="checkbox" id="fami" onChange={handleFilter} />
               <div>
                 <i className="fa-solid fa-child-reaching"></i>
                 <p>Familial</p>
               </div>
             </div>
             <div className="filter__selection">
-              <input type="checkbox" id="filter-lov" />
+              <input type="checkbox" id="love" onChange={handleFilter} />
               <div>
                 <i className="fa-solid fa-heart"></i>
                 <p>Romantique</p>
               </div>
             </div>
             <div className="filter__selection">
-              <input type="checkbox" id="filter-pets" />
+              <input type="checkbox" id="animals" onChange={handleFilter} />
               <div>
                 <i className="fa-solid fa-dog"></i>
                 <p>Animaux autorisés</p>
@@ -97,7 +123,7 @@ const Home = () => {
             <p>Plus de 500 logements sont disponibles dans cette ville</p>
           </div>
         </section>
-        <Lodging />
+        <Lodging destination={destination} dates={dates} data={data} />
       </main>
       <Footer />
     </>

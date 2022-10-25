@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { getHotel } from '../actions/hotel.actions';
 import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
@@ -14,13 +15,12 @@ const Hotel = () => {
   const [openModal, setOpenModal] = useState(false);
   const uid = useContext(UidContext);
   const hotelData = useSelector((state) => state.hotelReducer);
+  const { city, dates } = useContext(SearchContext);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getHotel(window.location.pathname));
   }, []);
-
-  const { dates } = useContext(SearchContext);
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -29,7 +29,7 @@ const Hotel = () => {
     return diffDays;
   }
 
-  // const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -77,9 +77,9 @@ const Hotel = () => {
               <i className="fa-solid fa-location-dot"></i>
               <span>{hotelData.address}</span>
             </div>
-            <span className="hotelDistance">Excellent location – {hotelData.distance}m from center</span>
+            <span className="hotelDistance">Excellente localisation – {hotelData.distance}m du centre</span>
             <span className="hotelPriceHighlight">
-              Book a stay over ${hotelData.cheapestPrice} at this property and get a free airport taxi
+              Reservez pour {hotelData.cheapestPrice}€ dans cet etablissement et obtenez un petit dejeuner offert !
             </span>
             <div className="hotelImages">
               {hotelData.photos?.map((photo, i) => (
@@ -94,11 +94,11 @@ const Hotel = () => {
                 <p className="hotelDesc">{hotelData.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
-                {/*   <h1>Perfect for a {days}-night stay!</h1>
-                <span>Located in the real heart of Krakow, this property has an excellent location score of 9.8!</span>
+                <h1>Parfait pour {days} nuit !</h1>
+                <span>Localisé dans le coeur de {hotelData.city}, cet établisement obtiens le score de 9.8 !</span>
                 <h2>
-                  <b>${days * hotelData.cheapestPrice * options.room}</b> ({days} nights)
-                </h2> */}
+                  <b>{days * hotelData.cheapestPrice} €</b> ({days} nuits)
+                </h2>
                 <button onClick={handleClick}>Réservez maintenant!</button>
               </div>
             </div>

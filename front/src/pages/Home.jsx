@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
 import Lodging from '../components/Home/Lodging';
 import Navbar from '../components/Navbar';
@@ -7,18 +6,16 @@ import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { useEffect } from 'react';
-import axios from 'axios';
 import useFetch from '../components/useFetch';
+import { SearchContext } from '../components/SearchContext';
 
 const Home = () => {
-  const uid = useContext(UidContext);
   const [destination, setDestination] = useState('Lille');
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(Date.now() + 3600 * 1000 * 24),
       key: 'selection',
     },
   ]);
@@ -44,9 +41,13 @@ const Home = () => {
   if (info.love) filter += '&love=true';
 
   const { data, error, reFetch } = useFetch(`/hotel?city=${destination}${filter}`);
+  const { dispatch } = useContext(SearchContext);
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     reFetch();
+
+    dispatch({ type: 'NEW_SEARCH', payload: { city: destination, dates } });
   };
 
   return (

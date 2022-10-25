@@ -9,6 +9,7 @@ import { UidContext } from './components/AppContext';
 import { useDispatch } from 'react-redux';
 import { getUser } from './actions/user.actions';
 import Hotel from './pages/Hotel';
+import { SearchContextProvider } from './components/SearchContext';
 
 const App = () => {
   const [uid, setUid] = useState(null);
@@ -33,16 +34,18 @@ const App = () => {
 
   return (
     <UidContext.Provider value={uid}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/log" element={<LogPage />} />
-          <Route path="/profil" element={<Profil />} />
-          <Route path="/addhotel" element={<AddHotel />} />
-          <Route path="/hotel/:id" element={<Hotel />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <SearchContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/log" element={<LogPage />} />
+            <Route path="/profil" element={<Profil />} />
+            <Route path="/addhotel" element={<AddHotel />} />
+            <Route path="/hotel/:id" element={<Hotel />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+      </SearchContextProvider>
     </UidContext.Provider>
   );
 };

@@ -12,6 +12,11 @@
   flex-direction: column;
   gap: 10px;
   position: relative;
+  .rating {
+    p {
+      display: inline;
+    }
+  }
 }
 
 .bookNow {
@@ -118,6 +123,7 @@
   font-weight: bold;
   cursor: pointer;
   border-radius: 5px;
+  border: 3px solid #0071c2;
 }
 
 .slider {

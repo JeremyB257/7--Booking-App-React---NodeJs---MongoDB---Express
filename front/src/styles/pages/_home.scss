@@ -150,6 +150,9 @@
 .featured-thumbnail-desc__rating {
   font-size: 12px;
   margin: 0 5px;
+  p {
+    display: inline;
+  }
 }
 
 @media screen and (max-width: 992px) {

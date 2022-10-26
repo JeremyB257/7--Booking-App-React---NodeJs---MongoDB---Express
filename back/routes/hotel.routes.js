@@ -14,6 +14,7 @@ import {
   editRoom,
   updateRoomAvailability,
   deleteRoom,
+  addRating,
 } from '../controllers/hotel.controller.js';
 
 //Read - Get
@@ -30,6 +31,9 @@ router.put('/:id', verifyUser, updateHotel);
 
 //Delete
 router.delete('/:id', verifyUser, deleteHotel);
+
+//Rating
+router.patch('/:id/addRating', verifyUser, addRating);
 
 // Room
 

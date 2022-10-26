@@ -37,10 +37,12 @@ const HotelSchema = new mongoose.Schema({
     required: true,
   },
   rating: {
-    type: Number,
-    min: 0,
-    max: 5,
-    default: 0,
+    type: [
+      {
+        posterId: String,
+        rating: Number,
+      },
+    ],
   },
   roomsList: {
     type: [

@@ -100,7 +100,7 @@ const Hotel = () => {
               <i className={sum > 2 ? 'fa-solid fa-star blue_star' : 'fa-solid fa-star grey_star'}></i>
               <i className={sum > 3 ? 'fa-solid fa-star blue_star' : 'fa-solid fa-star grey_star'}></i>
               <i className={sum > 4 ? 'fa-solid fa-star blue_star' : 'fa-solid fa-star grey_star'}></i>
-              <p> ({hotelData.rating.length} Avis)</p>
+              <p> ({hotelData.rating?.length} Avis)</p>
             </div>
             <div className="hotelAddress">
               <i className="fa-solid fa-location-dot"></i>

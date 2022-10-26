@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getHotel } from '../actions/hotel.actions';
+import { addRating, getHotel } from '../actions/hotel.actions';
 import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
@@ -17,6 +17,7 @@ const Hotel = () => {
   const hotelData = useSelector((state) => state.hotelReducer);
   const { city, dates } = useContext(SearchContext);
   const dispatch = useDispatch();
+  const [rating, setRating] = useState();
 
   useEffect(() => {
     dispatch(getHotel(window.location.pathname));
@@ -55,6 +56,26 @@ const Hotel = () => {
       navigate('/login');
     }
   };
+  const handleRating = (e) => {
+    setRating({
+      posterId: uid,
+      rating: parseInt(e.target.value),
+    });
+  };
+
+  const sendRating = () => {
+    dispatch(addRating(window.location.pathname.split('/')[2], rating)).then(() =>
+      dispatch(getHotel(window.location.pathname))
+    );
+  };
+
+  let sum = 0;
+  if (hotelData.rating?.length > 0) {
+    for (let i = 0; i < hotelData.rating.length; i++) {
+      sum += hotelData.rating[i].rating;
+    }
+    sum /= hotelData.rating.length;
+  }
 
   return (
     <>
@@ -73,11 +94,19 @@ const Hotel = () => {
           )}
           <div className="hotelWrapper">
             <h1 className="hotelTitle">{hotelData.name}</h1>
+            <div className="rating">
+              <i className={sum > 0 ? 'fa-solid fa-star blue_star' : 'fa-solid fa-star grey_star'}></i>
+              <i className={sum > 1 ? 'fa-solid fa-star blue_star' : 'fa-solid fa-star grey_star'}></i>
+              <i className={sum > 2 ? 'fa-solid fa-star blue_star' : 'fa-solid fa-star grey_star'}></i>
+              <i className={sum > 3 ? 'fa-solid fa-star blue_star' : 'fa-solid fa-star grey_star'}></i>
+              <i className={sum > 4 ? 'fa-solid fa-star blue_star' : 'fa-solid fa-star grey_star'}></i>
+              <p> ({hotelData.rating.length} Avis)</p>
+            </div>
             <div className="hotelAddress">
               <i className="fa-solid fa-location-dot"></i>
               <span>{hotelData.address}</span>
             </div>
-            <span className="hotelDistance">Excellente localisation – {hotelData.distance}m du centre</span>
+            <span className="hotelDistance">Excellente localisation – {hotelData.distance} du centre</span>
             <span className="hotelPriceHighlight">
               Reservez pour {hotelData.cheapestPrice}€ dans cet etablissement et obtenez un petit dejeuner offert !
             </span>
@@ -93,9 +122,27 @@ const Hotel = () => {
                 <h1 className="hotelTitle">{hotelData.title}</h1>
                 <p className="hotelDesc">{hotelData.desc}</p>
               </div>
+              <div className="star-rating">
+                <h3>Donnez votre avis</h3>
+                <div className="rating">
+                  <input type="radio" id="star5" name="rating" value="5" className="radio-1" onClick={handleRating} />
+                  <label htmlFor="star5" className="star star-1" title="Excellent"></label>
+                  <input type="radio" id="star4" name="rating" value="4" className="radio-2" onClick={handleRating} />
+                  <label htmlFor="star4" className="star star-2" title="Great"></label>
+                  <input type="radio" id="star3" name="rating" value="3" className="radio-3" onClick={handleRating} />
+                  <label htmlFor="star3" className="star star-3" title="Average"></label>
+                  <input type="radio" id="star2" name="rating" value="2" className="radio-4" onClick={handleRating} />
+                  <label htmlFor="star2" className="star star-4" title="Poor"></label>
+                  <input type="radio" id="star1" name="rating" value="1" className="radio-5" onClick={handleRating} />
+                  <label htmlFor="star1" className="star star-5" title="Bad"></label>
+                </div>
+                <button onClick={sendRating}>Envoyer</button>
+              </div>
               <div className="hotelDetailsPrice">
                 <h1>Parfait pour {days} nuit !</h1>
-                <span>Localisé dans le coeur de {hotelData.city}, cet établisement obtiens le score de 9.8 !</span>
+                <span>
+                  Localisé dans le coeur de {hotelData.city}, cet établisement obtiens le score de localisation de 9.8 !
+                </span>
                 <h2>
                   <b>{days * hotelData.cheapestPrice} €</b> ({days} nuits)
                 </h2>

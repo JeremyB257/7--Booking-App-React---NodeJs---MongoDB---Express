@@ -2,6 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import useFetch from '../useFetch';
+import CardEstablishement from './Card_establishement';
+import CardFeatured from './Card_featured';
 
 const Lodging = (props) => {
   const { data, error, reFetch } = useFetch(`/hotel?city=${props.destination}`);
@@ -17,20 +19,7 @@ const Lodging = (props) => {
         <h1>Hébergement à {props.destination}</h1>
         <div className="establishment__card">
           {props.data.slice(0, number).map((hotel) => (
-            <div key={hotel._id} className="thumbnail">
-              <NavLink to={`/hotel/${hotel._id}`}>
-                <img className="thumbnail__img" src={hotel.photos[0]} alt={hotel.title}></img>
-                <h2 className="thumbnail__title">{hotel.title}</h2>
-                <p className="thumbnail__description">Nuit à partir de {hotel.cheapestPrice}€</p>
-                <div className="thumbnail__rating">
-                  <i className={hotel.rating > 0 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                  <i className={hotel.rating > 1 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                  <i className={hotel.rating > 2 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                  <i className={hotel.rating > 3 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                  <i className={hotel.rating > 4 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                </div>
-              </NavLink>
-            </div>
+            <CardEstablishement key={hotel._id} hotel={hotel} />
           ))}
         </div>
         <h2 onClick={handleSeeMore}>Afficher plus</h2>
@@ -42,30 +31,10 @@ const Lodging = (props) => {
         </div>
         <div className="featured-establishment-card">
           {data
-            .sort((a, b) => b.rating - a.rating)
+            .sort((a, b) => b.rating.length - a.rating.length)
             .slice(0, 3)
             .map((hotel) => (
-              <div key={hotel._id} className="featured-thumbnail">
-                <NavLink to={`/hotel/${hotel._id}`}>
-                  <img className="featured-thumbnail__img" src={hotel.photos[0]} alt={hotel.title}></img>
-                  <div className="featured-thumbnail-desc">
-                    <h2 className="featured-thumbnail-desc__title">{hotel.title}</h2>
-                    <p className="featured-thumbnail-desc__description">Nuit à partir de {hotel.cheapestPrice}€</p>
-                    <div className="featured-thumbnail-desc__rating">
-                      <i
-                        className={hotel.rating > 0 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                      <i
-                        className={hotel.rating > 1 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                      <i
-                        className={hotel.rating > 2 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                      <i
-                        className={hotel.rating > 3 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                      <i
-                        className={hotel.rating > 4 ? 'fa-solid fa-star blue_star' : ' fa-solid fa-star grey_star'}></i>
-                    </div>
-                  </div>
-                </NavLink>
-              </div>
+              <CardFeatured key={hotel._id} hotel={hotel} />
             ))}
         </div>
       </div>

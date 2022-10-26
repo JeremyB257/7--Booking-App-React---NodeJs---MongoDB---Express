@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const GET_HOTEL = 'GET_HOTEL';
 export const ADD_HOTELS = 'ADD_HOTELS';
+export const ADD_RATING = 'ADD_RATING';
 
 //errors
 export const GET_HOTEL_ERRORS = 'GET_HOTEL_ERRORS';
@@ -39,5 +40,20 @@ export const addHotel = (newHotel) => {
           dispatch({ type: GET_HOTEL_ERRORS, payload: err.response.data.message });
         }
       });
+  };
+};
+
+export const addRating = (hotelId, rating) => {
+  return (dispatch) => {
+    return axios({
+      method: 'patch',
+      url: `${process.env.REACT_APP_PUBLIC_URL}api/hotel/${hotelId}/addRating`,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
+      data: rating,
+    })
+      .then((res) => {
+        dispatch({ type: ADD_RATING, payload: rating });
+      })
+      .catch((err) => console.log(err));
   };
 };

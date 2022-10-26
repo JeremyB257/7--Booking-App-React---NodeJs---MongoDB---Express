@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const GET_HOTEL = 'GET_HOTEL';
 export const ADD_HOTELS = 'ADD_HOTELS';
+export const DELETE_HOTEL = 'DELETE_HOTEL';
 export const ADD_RATING = 'ADD_RATING';
 
 //errors
@@ -40,6 +41,20 @@ export const addHotel = (newHotel) => {
           dispatch({ type: GET_HOTEL_ERRORS, payload: err.response.data.message });
         }
       });
+  };
+};
+
+export const deleteHotel = (hotelId) => {
+  return (dispatch) => {
+    return axios({
+      method: 'delete',
+      url: `${process.env.REACT_APP_PUBLIC_URL}api/hotel/${hotelId}`,
+      headers: { Authorization: 'Bearer ' + window.localStorage.getItem('jwt') },
+    })
+      .then((res) => {
+        dispatch({ type: DELETE_HOTEL, payload: { hotelId } });
+      })
+      .catch((err) => console.log(err));
   };
 };
 

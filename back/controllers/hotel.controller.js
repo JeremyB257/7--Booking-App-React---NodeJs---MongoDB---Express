@@ -87,6 +87,52 @@ export const deleteHotel = async (req, res, next) => {
   }
 };
 
+//rating
+export const addRating = async (req, res, next) => {
+  try {
+    const hotel = await HotelModel.findById(req.params.id);
+    let rating = hotel.rating.find((obj) => {
+      return obj.posterId === req.user.id;
+    });
+    if (rating) {
+      // i modify rating for this hotel
+      try {
+        rating.rating = req.body.rating;
+
+        hotel.save((err) => {
+          if (!err) return res.status(200).json({ message: 'Avis modifié' });
+          return res.status(500).json({ err });
+        });
+      } catch (err) {
+        return res.status(400).json(err);
+      }
+    } else {
+      // i add rating for this hotel
+      try {
+        return hotel.updateOne(
+          {
+            $push: {
+              rating: {
+                posterId: req.body.posterId,
+                rating: req.body.rating,
+              },
+            },
+          },
+          { new: true },
+          (err, docs) => {
+            if (!err) return res.status(200).send(docs);
+            else return res.status(400).send(err);
+          }
+        );
+      } catch (err) {
+        return res.status(400).send(err);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 // Room
 
 export const createRoom = async (req, res, next) => {};

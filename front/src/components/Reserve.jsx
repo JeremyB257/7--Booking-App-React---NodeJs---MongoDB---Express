@@ -2,12 +2,14 @@ import { useContext, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { SearchContext } from '../components/SearchContext';
+import { useSelector } from 'react-redux';
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
 
   //const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
-
+  const data = useSelector((state) => state.hotelReducer);
+  console.log(data.roomsList);
   const { dates } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
@@ -61,7 +63,7 @@ const Reserve = ({ setOpen, hotelId }) => {
       <div className="rContainer">
         <i className="fa-solid fa-circle-xmark close" onClick={() => setOpen(false)}></i>
         <span>Select your rooms:</span>
-        {data.map((item) => (
+        {data.roomsList.map((item) => (
           <div className="rItem" key={item._id}>
             <div className="rItemInfo">
               <div className="rTitle">{item.title}</div>
@@ -72,7 +74,7 @@ const Reserve = ({ setOpen, hotelId }) => {
               <div className="rPrice">{item.price}</div>
             </div>
             <div className="rSelectRooms">
-              {item.roomNumbers.map((roomNumber) => (
+              {/* {item.roomNumbers.map((roomNumber) => (
                 <div className="room">
                   <label>{roomNumber.number}</label>
                   <input
@@ -82,7 +84,7 @@ const Reserve = ({ setOpen, hotelId }) => {
                     disabled={!isAvailable(roomNumber)}
                   />
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
         ))}

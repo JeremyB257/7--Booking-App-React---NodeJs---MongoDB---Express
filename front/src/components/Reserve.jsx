@@ -45,15 +45,15 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const handleClick = async () => {
     try {
-      await Promise.all(
+      /*  await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(`${process.env.REACT_APP_API_URL}/rooms/availability/${roomId}`, {
+          const res = axios.put(`${process.env.REACT_APP_PUBLIC_URL}/api/hotel/${data._id}/availability/`, {
             dates: alldates,
           });
           return res.data;
         })
       );
-      setOpen(false);
+      setOpen(false); */
       navigate('/');
     } catch (err) {}
   };
@@ -61,34 +61,27 @@ const Reserve = ({ setOpen, hotelId }) => {
     <div className="reserve">
       <div className="rContainer">
         <i className="fa-solid fa-circle-xmark close" onClick={() => setOpen(false)}></i>
-        <span>Select your rooms:</span>
+        <span>Selectionnez la chambre:</span>
         {data.roomsList.map((item) => (
           <div className="rItem" key={item._id}>
             <div className="rItemInfo">
               <div className="rTitle">{item.title}</div>
               <div className="rDesc">{item.desc}</div>
               <div className="rMax">
-                Max people: <b>{item.maxPeople}</b>
+                Personnes max: <b>{item.maxPeople}</b>
               </div>
               <div className="rPrice">{item.price}</div>
             </div>
             <div className="rSelectRooms">
-              {/* {item.roomNumbers.map((roomNumber) => (
-                <div className="room">
-                  <label>{roomNumber.number}</label>
-                  <input
-                    type="checkbox"
-                    value={roomNumber._id}
-                    onChange={handleSelect}
-                    disabled={!isAvailable(roomNumber)}
-                  />
-                </div>
-              ))} */}
+              <div className="room">
+                <label>{item.title}</label>
+                <input type="checkbox" value={item._id} onChange={handleSelect} disabled={!isAvailable(item)} />
+              </div>
             </div>
           </div>
         ))}
         <button onClick={handleClick} className="rButton">
-          Reserve Now!
+          Reservez Maintenant!
         </button>
       </div>
     </div>

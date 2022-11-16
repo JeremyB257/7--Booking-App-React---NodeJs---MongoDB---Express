@@ -96,6 +96,7 @@ export const addRating = async (req, res, next) => {
     });
     if (rating) {
       // i modify rating for this hotel
+      
       try {
         rating.rating = req.body.rating;
 

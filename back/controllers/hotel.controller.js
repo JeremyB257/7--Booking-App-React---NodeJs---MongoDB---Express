@@ -84,6 +84,7 @@ export const deleteHotel = async (req, res, next) => {
     res.status(200).json('Hotel has been deleted.');
   } catch (err) {
     next(err);
+    
   }
 };
 

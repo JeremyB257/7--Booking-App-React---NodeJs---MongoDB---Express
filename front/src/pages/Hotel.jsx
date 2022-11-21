@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { addRating, getHotel } from '../actions/hotel.actions';
 import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
@@ -52,7 +53,7 @@ const Hotel = () => {
     if (uid) {
       setOpenModal(true);
     } else {
-      navigate('/login');
+      <Navigate to='/log' replace={true} />
     }
   };
   const handleRating = (e) => {

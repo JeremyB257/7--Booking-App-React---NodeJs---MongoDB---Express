@@ -1,3 +1,4 @@
+import hotelModel from '../models/hotel.model.js';
 import HotelModel from '../models/hotel.model.js';
 
 //Read - Get
@@ -139,6 +140,26 @@ export const createRoom = async (req, res, next) => {};
 
 export const editRoom = async (req, res, next) => {};
 
-export const updateRoomAvailability = async (req, res, next) => {};
+export const updateRoomAvailability = async (req, res, next) => {
+  try {
+    hotelModel
+      .findById(req.params.id)
+      .then((hotel) => {
+        const theRoom = hotel.roomsList.find((obj) => obj._id.equals(req.body.roomId));
+        if (!theRoom) {
+          return res.status(404).json({ message: 'Not found' });
+        } else {
+          theRoom.unavailableDates = req.body.dates;
+          hotel.save((err) => {
+            if (!err) return res.status(200).json({ message: 'Sauvegarde reussi' });
+            return res.status(500).json({ err });
+          });
+        }
+      })
+      .catch((err) => res.status(500).json({ err }));
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
 
 export const deleteRoom = async (req, res, next) => {};

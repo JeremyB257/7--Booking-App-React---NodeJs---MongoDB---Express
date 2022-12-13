@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addRating, getHotel } from '../actions/hotel.actions';
 import { UidContext } from '../components/AppContext';
 import Footer from '../components/Footer';
@@ -10,6 +10,7 @@ import Reserve from '../components/Reserve';
 import { SearchContext } from '../components/SearchContext';
 
 const Hotel = () => {
+  const navigate = useNavigate();
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -53,7 +54,7 @@ const Hotel = () => {
     if (uid) {
       setOpenModal(true);
     } else {
-      <Navigate to='/log' replace={true} />
+      navigate('/log');
     }
   };
   const handleRating = (e) => {
@@ -136,7 +137,7 @@ const Hotel = () => {
                   <input type="radio" id="star1" name="rating" value="1" className="radio-5" onClick={handleRating} />
                   <label htmlFor="star1" className="star star-5" title="Bad"></label>
                 </div>
-                <button onClick={sendRating}>Envoyer</button>
+                {uid ? <button onClick={sendRating}>Envoyer</button> : <button disabled={true}>Envoyer</button>}
               </div>
               <div className="hotelDetailsPrice">
                 <h1>Parfait pour {days} nuit !</h1>

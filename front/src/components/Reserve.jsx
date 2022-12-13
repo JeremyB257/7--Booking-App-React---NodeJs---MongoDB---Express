@@ -10,7 +10,6 @@ const Reserve = ({ setOpen, hotelId }) => {
   const data = useSelector((state) => state.hotelReducer);
 
   const { dates } = useContext(SearchContext);
-
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -53,15 +52,31 @@ const Reserve = ({ setOpen, hotelId }) => {
           return res.data;
         })
       );
-      setOpen(false); */
+      */
+      setOpen(false);
       navigate('/');
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  function formatTime(s) {
+    var date = new Date(s);
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var year = date.getFullYear();
+    var month = months[date.getMonth()];
+    var date = date.getDate();
+    var formattedTime = date + ' ' + month + ' ' + year;
+    return formattedTime;
+  }
+
   return (
     <div className="reserve">
       <div className="rContainer">
         <i className="fa-solid fa-circle-xmark close" onClick={() => setOpen(false)}></i>
         <span>Selectionnez la chambre:</span>
+        <p>Du: {formatTime(alldates[0])} </p>
+        <p>Au: {formatTime(alldates[1])} </p>
         {data.roomsList.map((item) => (
           <div className="rItem" key={item._id}>
             <div className="rItemInfo">
@@ -70,7 +85,7 @@ const Reserve = ({ setOpen, hotelId }) => {
               <div className="rMax">
                 Personnes max: <b>{item.maxPeople}</b>
               </div>
-              <div className="rPrice">{item.price}</div>
+              <div className="rPrice">{item.price}€</div>
             </div>
             <div className="rSelectRooms">
               <div className="room">

@@ -90,6 +90,16 @@ input[type='submit'] {
     color: $color-2;
     border: 3px solid $color-2;
   }
+  &:disabled {
+    background-color: rgba(239, 239, 239, 0.3);
+    color: rgba(16, 16, 16, 0.3);
+    border-color: rgba(118, 118, 118, 0.3);
+    cursor: auto;
+    &:hover {
+      color: rgba(16, 16, 16, 0.3);
+      border-color: rgba(118, 118, 118, 0.3);
+    }
+  }
 }
 input[type='checkbox'] {
   box-shadow: none;

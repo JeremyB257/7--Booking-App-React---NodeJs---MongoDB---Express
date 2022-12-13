@@ -44,15 +44,16 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const handleClick = async () => {
     try {
-      /*  await Promise.all(
+      await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(`${process.env.REACT_APP_PUBLIC_URL}/api/hotel/${data._id}/availability/`, {
+          const res = axios.put(`${process.env.REACT_APP_PUBLIC_URL}api/hotel/${data._id}/availability/`, {
             dates: alldates,
+            roomId: roomId,
           });
           return res.data;
         })
       );
-      */
+
       setOpen(false);
       navigate('/');
     } catch (err) {

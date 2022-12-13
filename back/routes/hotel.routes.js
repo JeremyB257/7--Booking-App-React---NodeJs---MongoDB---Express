@@ -39,7 +39,7 @@ router.patch('/:id/addRating', verifyUser, addRating);
 
 router.patch('/:id/createRoom', verifyUser, createRoom);
 router.patch('/:id/editRoom', verifyUser, editRoom);
-router.put('/:id/availability', verifyUser, updateRoomAvailability);
+router.put('/:id/availability', updateRoomAvailability);
 router.patch('/:id/deleteRoom', verifyUser, deleteRoom);
 
 export default router;

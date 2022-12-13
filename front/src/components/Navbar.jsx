@@ -55,7 +55,7 @@ const Navbar = () => {
                 Ajouter un hebergement
               </NavLink>
             </li>
-            <Logout />
+            {uid ? <Logout /> : ''}
           </ul>
         </div>
       </nav>
